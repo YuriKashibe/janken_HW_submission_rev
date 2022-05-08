@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/janken.css">
+<title>Rock Paper Scissors Lizard Spock</title>
+</head>
+<body>
+
+<header>
+  <h2 id="title"><a href="home.html" style="text-decoration: none; color: white;">Rock Paper Scissors Lizard Spock</a></h2>
+  <div id="subtitle">〜5つの手でじゃんけん対決〜</div>
+</header>
+
+<main>
+  <div class="remains">
+    あなたの持ち手
+    <br>
+    <div style="font-size: 16px;">出したい手をクリック↓ 5手使い果たした時点でゲーム終了</div>
+  </div>
+  <ul id="btns">
+    <button id="gu_btn">グー</button>
+    <button id="cho_btn">チョキ</button>
+    <button id="par_btn">パー</button>
+    <button id="lizard_btn">トカゲ</button>
+    <button id="spock_btn">スポック</button>
+  </ul>
+  <section class="result">
+    <div class="hand">
+        <h2 id="your_hand">あなたの手</h2>
+        <div id="image_field1"></div>
+        <div id="your_point"></div>
+    </div>
+    <div class="hand">
+        <h2 id="pc_hand">PCの手</h2>
+        <div id="image_field2"></div>
+        <div id="pc_point"></div>
+    </div>
+  </section>
+  <div id="judgment"></div>
+  <button id="restart"></button>
+
+  <ul>
+    <li id="pc_gu_btn">グー</li>
+    <li id="pc_cho_btn">チョキ</li>
+    <li id="pc_par_btn">パー</li>
+    <li id="pc_lizard_btn">トカゲ</li>
+    <li id="pc_spock_btn">スポック</li>
+  </ul>
+  <div class="remains">PCの持ち手</div> 
+</main>
+
+<footer></footer>
+<script>
+$("#restart").hide();
+
+function getRandomNumber(min, max) {
+    let step1 = max - min + 1;
+    let step2 = Math.random() * step1;
+    let result = Math.floor(step2) + min;
+    return result;
+}
+function createArrayOfNumbers(start, end){
+    let myArray = [];
+    for(let i = start; i <= end; i++) { 
+        myArray.push(i);
+    }
+    return myArray;
+}
+
+let numbersArray = createArrayOfNumbers(1,5);
+
+  $("#gu_btn").on("click",function(){
+    let randomIndex = getRandomNumber(0, numbersArray.length-1);
+    let randomNumber = numbersArray[randomIndex];
+    numbersArray.splice(randomIndex, 1)
+
+    $("#gu_btn").css("color","#000000");
+    $("#gu_btn").css("background-color","#000000");
+    $("#gu_btn").prop("disabled", true);
+    $("#gu_btn").css("cursor", "default");
+
+    $("#your_hand").html("あなたの手：グー")
+    $("#image_field1").html("👊");
+    
+    if (randomNumber == 1) {
+      $("#pc_hand").html("PCの手：グー")
+      $("#image_field2").html("👊");
+      $("#pc_gu_btn").css("color","#000000");
+      $("#pc_gu_btn").css("background-color","#000000");
+      $("#judgment").html("あいこ");
+      $("#judgment").css("color","#008000");
+    } else if (randomNumber == 2) {
+      $("#pc_hand").html("PCの手：チョキ")
+      $("#image_field2").html("✌️");
+      $("#pc_cho_btn").css("color","#000000");
+      $("#pc_cho_btn").css("background-color","#000000");
+      $("#judgment").html("あなたの勝ち");
+      $("#judgment").css("color","#ff0000");
+      $("#your_point").append("⭐️");
+    } else if (randomNumber == 3) {
+      $("#pc_hand").html("PCの手：パー")
+      $("#image_field2").html("✋");
+      $("#pc_par_btn").css("color","#000000");
+      $("#pc_par_btn").css("background-color","#000000");
+      $("#judgment").html("あなたの負け");
+      $("#judgment").css("color","#0000ff");
+      $("#pc_point").append("⭐️");
+    } else if (randomNumber == 4){
+      $("#pc_hand").html("PCの手：トカゲ")
+      $("#image_field2").html("🦎");
+      $("#pc_lizard_btn").css("color","#000000");
+      $("#pc_lizard_btn").css("background-color","#000000");
+      $("#judgment").html("あなたの勝ち");
+      $("#judgment").css("color","#ff0000");
+      $("#your_point").append("⭐️"); 
+    } else if (randomNumber == 5){
+      $("#pc_hand").html("PCの手：スポック")
+      $("#image_field2").html("🖖");
+      $("#pc_spock_btn").css("color","#000000");
+      $("#pc_spock_btn").css("background-color","#000000");
+      $("#judgment").html("あなたの負け");
+      $("#judgment").css("color","#0000ff");
+      $("#pc_point").append("⭐️");
+    }
+
+    if(numbersArray.length == 0){
+      let your_points = $("#your_point").text().length;
+      let pc_points = $("#pc_point").text().length;
+      if(your_points > pc_points){
+        $("#judgment").html("you won the game!");
+        $("#judgment").css("color","#ff0000");
+      }
+      if(your_points == pc_points){
+        $("#judgment").html("it's a tie game...!");
+        $("#judgment").css("color","#008000");
+      }
+      
+      if(your_points < pc_points){
+        $("#judgment").html("you lost the game...");
+        $("#judgment").css("color","#0000ff");
+      }
+      $("#restart").show();
+      $("#restart").html("restart!")
+    }
+  })
+
+  $("#cho_btn").on("click",function(){
+    let randomIndex = getRandomNumber(0, numbersArray.length-1);
+    let randomNumber = numbersArray[randomIndex];
+    numbersArray.splice(randomIndex, 1)
+
+    $("#cho_btn").css("color","#000000");
+    $("#cho_btn").css("background-color","#000000");
+    $("#cho_btn").prop("disabled", true);
+    $("#cho_btn").css("cursor", "default");
+
+    $("#your_hand").html("あなたの手：チョキ")
+    $("#image_field1").html("✌️");
+
+    if (randomNumber == 1) {
+      $("#pc_hand").html("PCの手：グー")
+      $("#image_field2").html("👊");
+      $("#pc_gu_btn").css("color","#000000");
+      $("#pc_gu_btn").css("background-color","#000000");
+      $("#judgment").html("あなたの負け");
+      $("#judgment").css("color","#0000ff");
+      $("#pc_point").append("⭐️");
+    } else if (randomNumber == 2) {
+      $("#pc_hand").html("PCの手：チョキ")
+      $("#image_field2").html("✌️");
+      $("#pc_cho_btn").css("color","#000000");
+      $("#pc_cho_btn").css("background-color","#000000");
+      $("#judgment").html("あいこ");
+      $("#judgment").css("color","#008000");
+    } else if (randomNumber == 3) {
+      $("#pc_hand").html("PCの手：パー")
+      $("#image_field2").html("✋");
+      $("#pc_par_btn").css("color","#000000");
+      $("#pc_par_btn").css("background-color","#000000");
+      $("#judgment").html("あなたの勝ち");
+      $("#judgment").css("color","#ff0000");
+      $("#your_point").append("⭐️");
+    } else if (randomNumber == 4){
+      $("#pc_hand").html("PCの手：トカゲ")
+      $("#image_field2").html("🦎");
+      $("#pc_lizard_btn").css("color","#000000");
+      $("#pc_lizard_btn").css("background-color","#000000");
+      $("#judgment").html("あなたの勝ち");
+      $("#judgment").css("color","#ff0000"); 
+      $("#your_point").append("⭐️");
+    } else if (randomNumber == 5){
+      $("#pc_hand").html("PCの手：スポック")
+      $("#image_field2").html("🖖");
+      $("#pc_spock_btn").css("color","#000000");
+      $("#pc_spock_btn").css("background-color","#000000");
+      $("#judgment").html("あなたの負け");
+      $("#judgment").css("color","#0000ff");
+      $("#pc_point").append("⭐️");
+    }
+
+    if(numbersArray.length == 0){
+      let your_points = $("#your_point").text().length;
+      let pc_points = $("#pc_point").text().length;
+      if(your_points > pc_points){
+        $("#judgment").html("you won the game!");
+        $("#judgment").css("color","#ff0000");
+      }
+      if(your_points == pc_points){
+        $("#judgment").html("it's a tie game...!");
+        $("#judgment").css("color","#008000");
+      }
+      
+      if(your_points < pc_points){
+        $("#judgment").html("you lost the game...");
+        $("#judgment").css("color","#0000ff");
+      }
+      $("#restart").show();
+      $("#restart").html("restart!")
+    }
+  })
+
+  $("#par_btn").on("click",function(){
+    let randomIndex = getRandomNumber(0, numbersArray.length-1);
+    let randomNumber = numbersArray[randomIndex];
+    numbersArray.splice(randomIndex, 1)
+
+    $("#par_btn").css("color","#000000");
+    $("#par_btn").css("background-color","#000000");
+    $("#par_btn").prop("disabled", true);
+    $("#par_btn").css("cursor", "default");
+
+    $("#your_hand").html("あなたの手：パー")
+    $("#image_field1").html("✋");
+
+    if (randomNumber == 1) {
+      $("#pc_hand").html("PCの手：グー")
+      $("#image_field2").html("👊");
+      $("#pc_gu_btn").css("color","#000000");
+      $("#pc_gu_btn").css("background-color","#000000");
+      $("#judgment").html("あなたの勝ち");
+      $("#judgment").css("color","#ff0000");
+      $("#your_point").append("⭐️");
+    } else if (randomNumber == 2) {
+      $("#pc_hand").html("PCの手：チョキ")
+      $("#image_field2").html("✌️");
+      $("#pc_cho_btn").css("color","#000000");
+      $("#pc_cho_btn").css("background-color","#000000");
+      $("#judgment").html("あなたの負け");
+      $("#judgment").css("color","#0000ff");
+      $("#pc_point").append("⭐️");
+    } else if (randomNumber == 3) {
+      $("#pc_hand").html("PCの手：パー")
+      $("#image_field2").html("✋");
+      $("#pc_par_btn").css("color","#000000");
+      $("#pc_par_btn").css("background-color","#000000");
+      $("#judgment").html("あいこ");
+      $("#judgment").css("color","#008000");
+    } else if (randomNumber == 4){
+      $("#pc_hand").html("PCの手：トカゲ")
+      $("#image_field2").html("🦎");
+      $("#pc_lizard_btn").css("color","#000000");
+      $("#pc_lizard_btn").css("background-color","#000000");
+      $("#judgment").html("あなたの負け");
+      $("#judgment").css("color","#0000ff");
+      $("#pc_point").append("⭐️"); 
+    } else if (randomNumber == 5){
+      $("#pc_hand").html("PCの手：スポック")
+      $("#image_field2").html("🖖");
+      $("#pc_spock_btn").css("color","#000000");
+      $("#pc_spock_btn").css("background-color","#000000");
+      $("#judgment").html("あなたの勝ち");
+      $("#judgment").css("color","#ff0000");
+      $("#your_point").append("⭐️");
+    }
+
+    if(numbersArray.length == 0){
+      let your_points = $("#your_point").text().length;
+      let pc_points = $("#pc_point").text().length;
+      if(your_points > pc_points){
+        $("#judgment").html("you won the game!");
+        $("#judgment").css("color","#ff0000");
+      }
+      if(your_points == pc_points){
+        $("#judgment").html("it's a tie game...!");
+        $("#judgment").css("color","#008000");
+      }
+      
+      if(your_points < pc_points){
+        $("#judgment").html("you lost the game...");
+        $("#judgment").css("color","#0000ff");
+      }
+      $("#restart").show();
+      $("#restart").html("restart!")
+    }
+  })
+
+  $("#lizard_btn").on("click",function(){
+    let randomIndex = getRandomNumber(0, numbersArray.length-1);
+    let randomNumber = numbersArray[randomIndex];
+    numbersArray.splice(randomIndex, 1)
+
+    $("#lizard_btn").css("color","#000000");
+    $("#lizard_btn").css("background-color","#000000");
+    $("#lizard_btn").prop("disabled", true);
+    $("#lizard_btn").css("cursor", "default");
+
+    $("#your_hand").html("あなたの手：トカゲ")
+    $("#image_field1").html("🦎");
+
+    if (randomNumber == 1) {
+      $("#pc_hand").html("PCの手：グー")
+      $("#image_field2").html("👊");
+      $("#pc_gu_btn").css("color","#000000");
+      $("#pc_gu_btn").css("background-color","#000000");
+      $("#judgment").html("あなたの負け");
+      $("#judgment").css("color","#0000ff");
+      $("#pc_point").append("⭐️");
+    } else if (randomNumber == 2) {
+      $("#pc_hand").html("PCの手：チョキ")
+      $("#image_field2").html("✌️");
+      $("#pc_cho_btn").css("color","#000000");
+      $("#pc_cho_btn").css("background-color","#000000");
+      $("#judgment").html("あなたの負け");
+      $("#judgment").css("color","#0000ff");
+      $("#pc_point").append("⭐️");
+    } else if (randomNumber == 3) {
+      $("#pc_hand").html("PCの手：パー")
+      $("#image_field2").html("✋");
+      $("#pc_par_btn").css("color","#000000");
+      $("#pc_par_btn").css("background-color","#000000");
+      $("#judgment").html("あなたの勝ち");
+      $("#judgment").css("color","#ff0000");
+      $("#your_point").append("⭐️");
+    } else if (randomNumber == 4){
+      $("#pc_hand").html("PCの手：トカゲ")
+      $("#image_field2").html("🦎");
+      $("#pc_lizard_btn").css("color","#000000");
+      $("#pc_lizard_btn").css("background-color","#000000");
+      $("#judgment").html("あいこ");
+      $("#judgment").css("color","#008000");
+    } else if (randomNumber == 5){
+      $("#pc_hand").html("PCの手：スポック")
+      $("#image_field2").html("🖖");
+      $("#pc_spock_btn").css("color","#000000");
+      $("#pc_spock_btn").css("background-color","#000000");
+      $("#judgment").html("あなたの勝ち");
+      $("#judgment").css("color","#ff0000");
+      $("#your_point").append("⭐️");
+    }
+
+    if(numbersArray.length == 0){
+      let your_points = $("#your_point").text().length;
+      let pc_points = $("#pc_point").text().length;
+      if(your_points > pc_points){
+        $("#judgment").html("you won the game!");
+        $("#judgment").css("color","#ff0000");
+      }
+      if(your_points == pc_points){
+        $("#judgment").html("it's a tie game...!");
+        $("#judgment").css("color","#008000");
+      }
+      
+      if(your_points < pc_points){
+        $("#judgment").html("you lost the game...");
+        $("#judgment").css("color","#0000ff");
+      }
+      $("#restart").show();
+      $("#restart").html("restart!")
+    }
+  })
+
+  $("#spock_btn").on("click",function(){
+    let randomIndex = getRandomNumber(0, numbersArray.length-1);
+    let randomNumber = numbersArray[randomIndex];
+    numbersArray.splice(randomIndex, 1)
+
+    $("#spock_btn").css("color","#000000");
+    $("#spock_btn").css("background-color","#000000");
+    $("#spock_btn").prop("disabled", true);
+    $("#spock_btn").css("cursor", "default");
+
+    $("#your_hand").html("あなたの手：スポック")
+    $("#image_field1").html("🖖");
+
+    if (randomNumber == 1) {
+      $("#pc_hand").html("PCの手：グー")
+      $("#image_field2").html("👊");
+      $("#pc_gu_btn").css("color","#000000");
+      $("#pc_gu_btn").css("background-color","#000000");
+      $("#judgment").html("あなたの勝ち");
+      $("#judgment").css("color","#ff0000");
+      $("#your_point").append("⭐️");
+    } else if (randomNumber == 2) {
+      $("#pc_hand").html("PCの手：チョキ")
+      $("#image_field2").html("✌️");
+      $("#pc_cho_btn").css("color","#000000");
+      $("#pc_cho_btn").css("background-color","#000000");
+      $("#judgment").html("あなたの勝ち");
+      $("#judgment").css("color","#ff0000");
+      $("#your_point").append("⭐️");
+    } else if (randomNumber == 3) {
+      $("#pc_hand").html("PCの手：パー")
+      $("#image_field2").html("✋");
+      $("#pc_par_btn").css("color","#000000");
+      $("#pc_par_btn").css("background-color","#000000");
+      $("#judgment").html("あなたの負け");
+      $("#judgment").css("color","#0000ff");
+      $("#pc_point").append("⭐️");
+    } else if (randomNumber == 4){
+      $("#pc_hand").html("PCの手：トカゲ")
+      $("#image_field2").html("🦎");
+      $("#pc_lizard_btn").css("color","#000000");
+      $("#pc_lizard_btn").css("background-color","#000000");
+      $("#judgment").html("あなたの負け"); 
+      $("#judgment").css("color","#0000ff");
+      $("#pc_point").append("⭐️"); 
+    } else if (randomNumber == 5){
+      $("#pc_hand").html("PCの手：スポック")
+      $("#image_field2").html("🖖");
+      $("#pc_spock_btn").css("color","#000000");
+      $("#pc_spock_btn").css("background-color","#000000");
+      $("#judgment").html("あいこ");
+      $("#judgment").css("color","#008000");
+    }
+
+    if(numbersArray.length == 0){
+      let your_points = $("#your_point").text().length;
+      let pc_points = $("#pc_point").text().length;
+      if(your_points > pc_points){
+        $("#judgment").html("you won the game!");
+        $("#judgment").css("color","#ff0000");
+      }
+      if(your_points == pc_points){
+        $("#judgment").html("it's a tie game...!");
+        $("#judgment").css("color","#008000");
+      }
+      
+      if(your_points < pc_points){
+        $("#judgment").html("you lost the game...");
+        $("#judgment").css("color","#0000ff");
+      }
+      $("#restart").show();
+      $("#restart").html("restart!")
+    }
+});
+
+$("#restart").on("click", function(){
+  location.reload();
+  });
+
+//じゃんけん用のSCRIPTを書いてください
+
+// グーボタンを押したら？→if式を使う(?)
+
+// コンピュータの出す手はmath object参照。パターンを数字に置き換えて、random表示する。
+    
+    
+    
+    
+    
+    
+
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+body{
+    background-color: beige;
+    margin: 0;
+    padding: 0; 
+    text-align: center; 
+    font-size: 32px;
+}
+
+#title{
+    margin: 0;
+    color: #fff;
+    background-color: darkblue;
+}
+
+#subtitle{
+    font-size: 25px;
+    margin: 0 0 250px;
+    background-color: lightblue;
+}
+
+.button_area{
+    display: flex;
+}
+
+button{
+    display: block;
+    width: 300px;
+    line-height: 1;
+    margin: auto;
+    padding: 21px 0;
+    font-size: 1.8rem;
+    color: #fff;
+    text-decoration: none;
+    transition: .3s;
+}
+
+.start_button{
+    background-color: blue;
+}
+
+.start_button:hover{
+    background-color: crimson;
+}
+
+.rules_button{
+    background-color: darkgreen;
+}
+
+.rules_button:hover{
+    background-color: gold;
+}
+
+button>a{
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+}

@@ -1,0 +1,117 @@
+body{
+    background-color: beige;
+    margin:0;
+    padding:0;
+    text-align:center;
+    font-size: 32px;
+}
+header{
+    background-color: #fff;
+    text-align: center;
+}
+
+h2{
+    margin: 10px;
+}
+
+#title{
+    margin: 0;
+    color: #fff;
+    background-color: darkblue;
+}
+
+#subtitle{
+    font-size: 25px;
+    background-color: lightblue;
+}
+
+main{
+    margin: 30px 0 0;
+}
+
+#image_field1{
+    font-size: 250px;
+}
+
+#image_field2{
+    font-size: 250px;
+}
+
+footer{
+    background-color: #fff;
+    text-align: center;
+}
+
+.remains{
+    font-size: 24px;
+    margin: 10px 0 0;
+}
+
+.result{
+    display: flex;
+    justify-content: center;
+    font-size: 28px;
+}
+
+.hand{
+    margin: 0 100px;
+}
+
+p{
+    font-size:200%;
+    text-align: center;
+    border-bottom:1px solid #fff;
+    height:200px;
+}
+ul{
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid #000000;
+    display:table;  /* 定義 */
+    table-layout: fixed;
+    width:100%;
+}
+button{
+    width: 20%;
+    font-size: 32px;
+    text-align: center;
+    list-style-type:none;
+    border: 1px solid #666;
+    background-color: #FFF;
+    display:table-cell;  /* 定義 */
+    cursor: pointer;
+}
+button:hover{
+    background: #0066CC;
+    color:#fff;
+}
+
+#judgment{
+    height: fit-content;
+    margin: auto 0;
+    font-size: 50px;
+    font-weight: bold;
+
+}
+
+li{
+    width: 20%;
+    font-size: 32px;
+    text-align: center;
+    list-style-type:none;
+    border: 1px solid #666;
+    background-color: #FFF;
+    display:table-cell;  /* 定義 */
+}
+
+#restart{
+    font-size: 24px;
+    width: auto;
+    margin: 20px;
+    background-color: aliceblue;
+}
+
+#restart:hover{
+    background-color: crimson;
+    color:#fff;
+}
